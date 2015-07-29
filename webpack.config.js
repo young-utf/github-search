@@ -1,5 +1,7 @@
 module.exports = {
-    entry: "./app/App.js",
+    entry: {
+        javascript: "./app/App.js"
+    },
     output: {
         filename: "public/bundle.js"
     },
@@ -9,7 +11,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel'
-        }
+            }
         ]
     }
 };
