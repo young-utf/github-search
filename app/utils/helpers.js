@@ -12,9 +12,19 @@ function getUserInfo (username) {
     return axios.get('https://api.github.com/users/' + username);
 };
 
-var promiseObj = getRepos('young-utf');
+var helpers = {
+    getGithubInfo: function (username) {
+        return axios.all([
+            getRepos(username),
+            getUserInfo(username)
+        ]).then(function (arr) {
+            console.log(arr);
+            return {
+                repos: arr[0].data,
+                bio: arr[1].data
+            }
+        });
+    }
+};
 
-promiseObj
-    .then(function (data) {
-        console.log(data);
-    });
+module.exports = helpers;

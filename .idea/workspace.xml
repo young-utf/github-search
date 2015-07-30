@@ -48,8 +48,8 @@
       <file leaf-file-name="helpers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/utils/helpers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36409608">
-              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.4096081">
+              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -927,8 +927,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/utils/helpers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36409608">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.4096081">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
