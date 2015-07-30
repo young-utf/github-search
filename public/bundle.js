@@ -23552,8 +23552,8 @@
 
 	var React = __webpack_require__(1);
 	var Main = __webpack_require__(197);
-	var Home = __webpack_require__(198);
-	var Profile = __webpack_require__(199);
+	var Home = __webpack_require__(199);
+	var Profile = __webpack_require__(200);
 	var Router = __webpack_require__(157);
 	var DefaultRoute = Router.DefaultRoute;
 	var Route = Router.Route;
@@ -23573,7 +23573,7 @@
 
 	var React = __webpack_require__(1);
 	var RouteHandler = __webpack_require__(157).RouteHandler;
-	var SearchGithub = __webpack_require__(207);
+	var SearchGithub = __webpack_require__(198);
 
 	var Main = React.createClass({
 	    displayName: 'Main',
@@ -23606,6 +23606,55 @@
 /* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * Created by youngmoon on 7/31/15.
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(157);
+	var SearchGithub = React.createClass({
+	    displayName: 'SearchGithub',
+
+	    mixins: [Router.Navigation],
+	    handleSubmit: function handleSubmit() {
+	        var username = this.refs.username.getDOMNode().value;
+	        this.refs.username.getDOMNode().value = '';
+	        this.transitionTo('profile', { username: username });
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: "col-sm-12" },
+	            React.createElement(
+	                'form',
+	                { onSubmit: this.handleSubmit },
+	                React.createElement(
+	                    'div',
+	                    { className: "form-group col-sm-7" },
+	                    React.createElement('input', { type: "text", className: "form-control", ref: "username" })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "form-group col-sm-5" },
+	                    React.createElement(
+	                        'button',
+	                        { type: "submit", className: "btn btn-block btn-primary" },
+	                        'Search Github'
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = SearchGithub;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	var React = __webpack_require__(1);
@@ -23625,7 +23674,7 @@
 	module.exports = Home;
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23636,11 +23685,11 @@
 
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(157);
-	var Repos = __webpack_require__(200);
-	var UserProfile = __webpack_require__(201);
-	var Notes = __webpack_require__(202);
-	var ReactFireMixin = __webpack_require__(205);
-	var Firebase = __webpack_require__(206);
+	var Repos = __webpack_require__(204);
+	var UserProfile = __webpack_require__(205);
+	var Notes = __webpack_require__(201);
+	var ReactFireMixin = __webpack_require__(206);
+	var Firebase = __webpack_require__(207);
 	var helpers = __webpack_require__(208);
 
 	var Profile = React.createClass({
@@ -23700,42 +23749,6 @@
 	module.exports = Profile;
 
 /***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by youngmoon on 7/28/15.
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var Repos = React.createClass({
-	    displayName: 'Repos',
-
-	    propTypes: {
-	        username: React.PropTypes.string.isRequired,
-	        repos: React.PropTypes.array.isRequired
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            'REPOS ',
-	            React.createElement('br', null),
-	            'Username: ',
-	            this.props.username,
-	            ' ',
-	            React.createElement('br', null),
-	            'REPOS: ',
-	            this.props.repos
-	        );
-	    }
-	});
-
-	module.exports = Repos;
-
-/***/ },
 /* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -23745,44 +23758,8 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-
-	var UserProfile = React.createClass({
-	    displayName: 'UserProfile',
-
-	    propTypes: {
-	        username: React.PropTypes.string.isRequired,
-	        bio: React.PropTypes.object.isRequired
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            'User Profile ',
-	            React.createElement('br', null),
-	            'Username: ',
-	            this.props.username,
-	            ' ',
-	            React.createElement('br', null),
-	            'Bio: ',
-	            this.props.bio
-	        );
-	    }
-	});
-
-	module.exports = UserProfile;
-
-/***/ },
-/* 202 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by youngmoon on 7/28/15.
-	 */
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var NotesList = __webpack_require__(203);
-	var AddNote = __webpack_require__(204);
+	var NotesList = __webpack_require__(202);
+	var AddNote = __webpack_require__(203);
 
 	var Notes = React.createClass({
 	    displayName: 'Notes',
@@ -23812,7 +23789,7 @@
 	module.exports = Notes;
 
 /***/ },
-/* 203 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23846,7 +23823,7 @@
 	module.exports = NotesList;
 
 /***/ },
-/* 204 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23871,16 +23848,20 @@
 	    },
 	    render: function render() {
 	        return React.createElement(
-	            'div',
-	            { className: "input-group" },
-	            React.createElement('input', { type: "text", className: "form-control", ref: "note", placeholder: "Add a new note" }),
+	            'form',
+	            { onSubmit: this.handleSubmit },
 	            React.createElement(
-	                'span',
-	                { className: "input-group-btn" },
+	                'div',
+	                { className: "input-group" },
+	                React.createElement('input', { type: "text", className: "form-control", ref: "note", placeholder: "Add a new note" }),
 	                React.createElement(
-	                    'button',
-	                    { className: "btn btn-default", type: "button", onClick: this.handleSubmit },
-	                    ' Submit '
+	                    'span',
+	                    { className: "input-group-btn" },
+	                    React.createElement(
+	                        'button',
+	                        { className: "btn btn-default", type: "submit" },
+	                        ' Submit '
+	                    )
 	                )
 	            )
 	        );
@@ -23890,7 +23871,168 @@
 	module.exports = AddNote;
 
 /***/ },
+/* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by youngmoon on 7/28/15.
+	 */
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Repos = React.createClass({
+	    displayName: "Repos",
+
+	    propTypes: {
+	        username: React.PropTypes.string.isRequired,
+	        repos: React.PropTypes.array.isRequired
+	    },
+	    render: function render() {
+	        var repos = this.props.repos.map(function (repo, index) {
+	            return React.createElement(
+	                "li",
+	                { className: "list-group-item", key: index },
+	                repo.html_url && React.createElement(
+	                    "h4",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: repo.html_url },
+	                        repo.name
+	                    )
+	                ),
+	                repo.description && React.createElement(
+	                    "p",
+	                    null,
+	                    " ",
+	                    repo.description
+	                )
+	            );
+	        });
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "h3",
+	                null,
+	                " User Repos "
+	            ),
+	            React.createElement(
+	                "ul",
+	                { className: "list-group" },
+	                repos
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Repos;
+
+/***/ },
 /* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by youngmoon on 7/28/15.
+	 */
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var UserProfile = React.createClass({
+	    displayName: "UserProfile",
+
+	    propTypes: {
+	        username: React.PropTypes.string.isRequired,
+	        bio: React.PropTypes.object.isRequired
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "h3",
+	                null,
+	                " User Profile "
+	            ),
+	            React.createElement(
+	                "ul",
+	                { className: "list-group" },
+	                this.props.bio.avatar_url && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    " ",
+	                    React.createElement("img", { src: this.props.bio.avatar_url, className: "img-rounded img-responsive" })
+	                ),
+	                this.props.bio.name && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Name: ",
+	                    this.props.bio.name
+	                ),
+	                this.props.bio.login && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Username: ",
+	                    this.props.bio.login
+	                ),
+	                this.props.bio.email && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Email: ",
+	                    this.props.bio.email
+	                ),
+	                this.props.bio.location && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Location: ",
+	                    this.props.bio.location
+	                ),
+	                this.props.bio.company && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Company: ",
+	                    this.props.bio.company
+	                ),
+	                this.props.bio.followers && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Followers: ",
+	                    this.props.bio.followers
+	                ),
+	                this.props.bio.following && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Following: ",
+	                    this.props.bio.following
+	                ),
+	                this.props.bio.following && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Public Repos: ",
+	                    this.props.bio.public_repos
+	                ),
+	                this.props.bio.blog && React.createElement(
+	                    "li",
+	                    { className: "list-group-item" },
+	                    "Blog: ",
+	                    React.createElement(
+	                        "a",
+	                        { href: this.props.bio.blog },
+	                        " ",
+	                        this.props.bio.blog
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = UserProfile;
+
+/***/ },
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -24261,7 +24403,7 @@
 
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.2.7
@@ -24531,55 +24673,6 @@
 
 
 /***/ },
-/* 207 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by youngmoon on 7/31/15.
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var SearchGithub = React.createClass({
-	    displayName: 'SearchGithub',
-
-	    mixins: [Router.Navigation],
-	    handleSubmit: function handleSubmit() {
-	        var username = this.refs.username.getDOMNode().value;
-	        this.refs.username.getDOMNode().value = '';
-	        this.transitionTo('profile', { username: username });
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: "col-sm-12" },
-	            React.createElement(
-	                'form',
-	                { onSubmit: this.handleSubmit },
-	                React.createElement(
-	                    'div',
-	                    { className: "form-group col-sm-7" },
-	                    React.createElement('input', { type: "text", className: "form-control", ref: "username" })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: "form-group col-sm-5" },
-	                    React.createElement(
-	                        'button',
-	                        { type: "submit", className: "btn btn-block btn-primary" },
-	                        'Search Github'
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = SearchGithub;
-
-/***/ },
 /* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -24602,7 +24695,6 @@
 	var helpers = {
 	    getGithubInfo: function getGithubInfo(username) {
 	        return axios.all([getRepos(username), getUserInfo(username)]).then(function (arr) {
-	            console.log(arr);
 	            return {
 	                repos: arr[0].data,
 	                bio: arr[1].data

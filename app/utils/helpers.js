@@ -18,7 +18,6 @@ var helpers = {
             getRepos(username),
             getUserInfo(username)
         ]).then(function (arr) {
-            console.log(arr);
             return {
                 repos: arr[0].data,
                 bio: arr[1].data
