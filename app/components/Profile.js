@@ -14,21 +14,23 @@ var Profile = React.createClass({
     mixins: [Router.State, ReactFireMixin],
     getInitialState: function () {
         return {
-            notes: [1,2,3,4,5],
+            notes: [],
             bio: {name: 'Tyler'},
             repos: [1,2,3]
         };
     },
     componentDidMount: function () {
-        //this.ref = new Firebase('https://github-note-taker.firebaseio.com');
-        //var childRef = this.ref.child(this.getParams().username);
-        //this.bindAsArray(childRef, 'notes');
+
     },
     componentWillUnmount: function () {
-        this.unbind('notes');
+
     },
     handleAddNote: function (newNote) {
-        this.ref.child(this.getParams().username).set(this.state.notes.concat)[newNote];
+        this.state.notes.push(newNote);
+        var notes = this.state.notes;
+        this.setState({
+            notes:  notes
+        });
     },
     render: function () {
         var username = this.getParams().username;

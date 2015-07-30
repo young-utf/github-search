@@ -23638,8 +23638,8 @@
 	var Repos = __webpack_require__(200);
 	var UserProfile = __webpack_require__(201);
 	var Notes = __webpack_require__(202);
-	var ReactFireMixin = __webpack_require__(204);
-	var Firebase = __webpack_require__(205);
+	var ReactFireMixin = __webpack_require__(205);
+	var Firebase = __webpack_require__(206);
 
 	var Profile = React.createClass({
 	    displayName: 'Profile',
@@ -23647,21 +23647,19 @@
 	    mixins: [Router.State, ReactFireMixin],
 	    getInitialState: function getInitialState() {
 	        return {
-	            notes: [1, 2, 3, 4, 5],
+	            notes: [],
 	            bio: { name: 'Tyler' },
 	            repos: [1, 2, 3]
 	        };
 	    },
-	    componentDidMount: function componentDidMount() {
-	        //this.ref = new Firebase('https://github-note-taker.firebaseio.com');
-	        //var childRef = this.ref.child(this.getParams().username);
-	        //this.bindAsArray(childRef, 'notes');
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        this.unbind('notes');
-	    },
+	    componentDidMount: function componentDidMount() {},
+	    componentWillUnmount: function componentWillUnmount() {},
 	    handleAddNote: function handleAddNote(newNote) {
-	        this.ref.child(this.getParams().username).set(this.state.notes.concat)[newNote];
+	        this.state.notes.push(newNote);
+	        var notes = this.state.notes;
+	        this.setState({
+	            notes: notes
+	        });
 	    },
 	    render: function render() {
 	        var username = this.getParams().username;
@@ -23775,7 +23773,7 @@
 
 	var React = __webpack_require__(1);
 	var NotesList = __webpack_require__(203);
-	var AddNote = __webpack_require__(206);
+	var AddNote = __webpack_require__(204);
 
 	var Notes = React.createClass({
 	    displayName: 'Notes',
@@ -23840,6 +23838,50 @@
 
 /***/ },
 /* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by youngmoon on 7/30/15.
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var AddNote = React.createClass({
+	    displayName: 'AddNote',
+
+	    propTypes: {
+	        username: React.PropTypes.string.isRequired,
+	        addNote: React.PropTypes.func.isRequired
+	    },
+	    handleSubmit: function handleSubmit() {
+	        var newNote = this.refs.note.getDOMNode().value;
+	        this.refs.note.getDOMNode().value = '';
+	        this.props.addNote(newNote);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: "input-group" },
+	            React.createElement('input', { type: "text", className: "form-control", ref: "note", placeholder: "Add a new note" }),
+	            React.createElement(
+	                'span',
+	                { className: "input-group-btn" },
+	                React.createElement(
+	                    'button',
+	                    { className: "btn btn-default", type: "button", onClick: this.handleSubmit },
+	                    ' Submit '
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = AddNote;
+
+/***/ },
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -24210,7 +24252,7 @@
 
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.2.7
@@ -24478,44 +24520,6 @@
 
 	module.exports = Firebase;
 
-
-/***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by youngmoon on 7/30/15.
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var AddNote = React.createClass({
-	    displayName: 'AddNote',
-
-	    propTypes: {
-	        username: React.PropTypes.string.isRequired,
-	        addNote: React.PropTypes.func.isRequired
-	    },
-	    handleSubmit: function handleSubmit() {
-	        var newNote = this.refs.note.getDOMNode().value;
-	        this.refs.note.getDOMNode().value = '';
-	        this.props.addNote(newNote);
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: "input-group" },
-	            React.createElement('input', { type: "text", className: "form-control", ref: "note", placeholder: "Add a new note" }),
-	            React.createElement(
-	                'span',
-	                { className: "input-group-btn" },
-	                React.createElement('button', { className: "btn btn-default", type: "button", onClick: this.handleSubmit })
-	            )
-	        );
-	    }
-	});
 
 /***/ }
 /******/ ]);

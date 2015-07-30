@@ -19,9 +19,11 @@ var AddNote = React.createClass({
             <div className="input-group">
                 <input type="text" className="form-control" ref="note" placeholder="Add a new note" />
                 <span className="input-group-btn">
-                    <button className="btn btn-default" type="button" onClick={this.handleSubmit}></button>
+                    <button className="btn btn-default" type="button" onClick={this.handleSubmit}> Submit </button>
                 </span>
             </div>
-        )
+        );
     }
-})
+});
+
+module.exports = AddNote;
