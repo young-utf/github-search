@@ -46,12 +46,22 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var routes = __webpack_require__(196);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	Router.run(routes, function (Root) {
-	    React.render(React.createElement(Root, null), document.getElementById('app'));
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var _configRoutes = __webpack_require__(196);
+
+	var _configRoutes2 = _interopRequireDefault(_configRoutes);
+
+	_reactRouter2['default'].run(_configRoutes2['default'], function (Root, state) {
+	    _react2['default'].render(_react2['default'].createElement(Root, state), document.getElementById('app'));
 	});
 
 /***/ },
@@ -23550,19 +23560,33 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Main = __webpack_require__(197);
-	var Home = __webpack_require__(199);
-	var Profile = __webpack_require__(200);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _componentsMain = __webpack_require__(197);
+
+	var _componentsMain2 = _interopRequireDefault(_componentsMain);
+
+	var _componentsHome = __webpack_require__(199);
+
+	var _componentsHome2 = _interopRequireDefault(_componentsHome);
+
+	var _componentsProfileJs = __webpack_require__(200);
+
+	var _componentsProfileJs2 = _interopRequireDefault(_componentsProfileJs);
+
 	var Router = __webpack_require__(157);
 	var DefaultRoute = Router.DefaultRoute;
 	var Route = Router.Route;
 
-	module.exports = React.createElement(
+	module.exports = _react2['default'].createElement(
 	    Route,
-	    { name: "app", path: "/", handler: Main },
-	    React.createElement(Route, { name: "profile", path: "profile/:username", handler: Profile }),
-	    React.createElement(DefaultRoute, { handler: Home })
+	    { name: "app", path: "/", handler: _componentsMain2['default'] },
+	    _react2['default'].createElement(Route, { name: "profile", path: "profile/:username", handler: _componentsProfileJs2['default'] }),
+	    _react2['default'].createElement(DefaultRoute, { handler: _componentsHome2['default'] })
 	);
 
 /***/ },
@@ -23703,7 +23727,7 @@
 	            repos: []
 	        };
 	    },
-	    componentDidMount: function componentDidMount() {
+	    init: function init() {
 	        helpers.getGithubInfo(this.getParams().username).then((function (dataObj) {
 	            this.setState({
 	                bio: dataObj.bio,
@@ -23711,7 +23735,13 @@
 	            });
 	        }).bind(this));
 	    },
+	    componentDidMount: function componentDidMount() {
+	        this.init();
+	    },
 	    componentWillUnmount: function componentWillUnmount() {},
+	    componentWillReceiveProps: function componentWillReceiveProps() {
+	        this.init();
+	    },
 	    handleAddNote: function handleAddNote(newNote) {
 	        this.state.notes.push(newNote);
 	        var notes = this.state.notes;
@@ -24679,22 +24709,29 @@
 	/**
 	 * Created by youngmoon on 7/31/15.
 	 */
-
 	'use strict';
 
-	var axios = __webpack_require__(209);
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _axios = __webpack_require__(209);
+
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function getRepos(username) {
-	    return axios.get('https://api.github.com/users/' + username + '/repos');
+	    return _axios2['default'].get('https://api.github.com/users/' + username + '/repos');
 	};
 
 	function getUserInfo(username) {
-	    return axios.get('https://api.github.com/users/' + username);
+	    return _axios2['default'].get('https://api.github.com/users/' + username);
 	};
 
 	var helpers = {
 	    getGithubInfo: function getGithubInfo(username) {
-	        return axios.all([getRepos(username), getUserInfo(username)]).then(function (arr) {
+	        return _axios2['default'].all([getRepos(username), getUserInfo(username)]).then(function (arr) {
 	            return {
 	                repos: arr[0].data,
 	                bio: arr[1].data
@@ -24703,7 +24740,8 @@
 	    }
 	};
 
-	module.exports = helpers;
+	exports['default'] = helpers;
+	module.exports = exports['default'];
 
 /***/ },
 /* 209 */

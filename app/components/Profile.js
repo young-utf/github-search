@@ -20,7 +20,7 @@ var Profile = React.createClass({
             repos: []
         };
     },
-    componentDidMount: function () {
+    init: function () {
         helpers.getGithubInfo(this.getParams().username)
             .then(function (dataObj) {
                 this.setState({
@@ -29,8 +29,14 @@ var Profile = React.createClass({
                 });
             }.bind(this));
     },
+    componentDidMount: function () {
+        this.init();
+    },
     componentWillUnmount: function () {
 
+    },
+    componentWillReceiveProps: function () {
+        this.init();
     },
     handleAddNote: function (newNote) {
         this.state.notes.push(newNote);
